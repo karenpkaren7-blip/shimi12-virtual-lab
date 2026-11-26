@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>آزمایشگاه مجازی الکتروشیمی | شیمی دوازدهم</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+:root{--navy:#10243a;--blue:#176b87;--cyan:#20b8b0;--gold:#e8b65a;--ink:#1c2d3d;--muted:#647789;--paper:#f3f7fa;--line:#dce6ed;--white:#fff;--green:#16865d;--red:#c84e4e}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Vazirmatn",Tahoma,sans-serif}
+header{background:linear-gradient(125deg,#0d2136,#15506a 65%,#168c91);color:white;padding:30px max(5vw,18px) 24px;position:relative;overflow:hidden}
+header:after{content:"";position:absolute;width:300px;height:300px;border:1px solid #ffffff22;border-radius:50%;left:-70px;top:-170px;box-shadow:0 0 0 35px #ffffff0a,0 0 0 75px #ffffff08}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;position:relative;z-index:1}
+.brand{font-size:13px;color:#b9e8e9;letter-spacing:.3px}.tag{border:1px solid #ffffff55;border-radius:30px;padding:6px 12px;font-size:12px}
+h1{font-size:clamp(25px,4vw,42px);margin:24px 0 8px;line-height:1.5;position:relative;z-index:1}
+header p{color:#d6e9ef;margin:0;max-width:800px;line-height:2;position:relative;z-index:1}
+.creator{margin-top:20px;background:#ffffff12;border:1px solid #ffffff30;border-radius:12px;padding:11px 15px;display:inline-block;font-size:13px;position:relative;z-index:1}
+main{max-width:1250px;margin:24px auto;padding:0 18px 50px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.nav button{border:1px solid var(--line);background:white;color:var(--ink);border-radius:11px;padding:10px 14px;font:600 13px inherit;cursor:pointer;transition:.2s}
+.nav button.active,.nav button:hover{background:var(--navy);color:white;border-color:var(--navy)}
+.panel{display:none}.panel.active{display:block}
+.card{background:white;border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 8px 24px #183c5510}
+.card h2{margin:0 0 12px;font-size:21px;color:var(--navy)}.card h3{font-size:16px;margin:0 0 9px;color:#15546c}
+.lead{color:var(--muted);line-height:2;margin:0 0 14px;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:13px}
+.tile{background:linear-gradient(145deg,#fff,#f4f9fb);border:1px solid var(--line);border-radius:15px;padding:17px;cursor:pointer;transition:.2s}
+.tile:hover{transform:translateY(-3px);border-color:#70bdc2;box-shadow:0 10px 25px #12465a12}
+.tile .ico{font-size:27px}.tile b{display:block;margin:8px 0 4px;color:var(--navy)}.tile span{font-size:12px;color:var(--muted);line-height:1.8}
+button,.btn{font-family:inherit}.btn{border:0;border-radius:10px;padding:10px 16px;background:var(--blue);color:white;cursor:pointer;font-weight:700;font-size:13px}
+.btn.secondary{background:#e8f1f5;color:#17445b}.btn.gold{background:#a86d13}.btn.danger{background:#a83d45}.btn:disabled{opacity:.45;cursor:not-allowed}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#334c60}
+select,input{font:14px inherit;font-family:inherit;border:1px solid #cbd9e2;border-radius:10px;padding:10px 12px;background:white;color:var(--ink);width:100%;outline-color:var(--cyan)}
+.field{margin:10px 0}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.eq{direction:ltr;text-align:center;background:#eff7fa;border:1px dashed #a9c8d5;border-radius:12px;padding:14px;font-family:ui-monospace,Consolas,monospace;font-size:clamp(14px,2vw,18px);font-weight:700;color:#123c54;margin:12px 0;overflow-wrap:anywhere}
+.note{background:#fff8e8;border-right:4px solid var(--gold);padding:12px 14px;border-radius:9px;line-height:1.9;font-size:13px}
+.good{background:#eaf7f0;border-right:4px solid var(--green);padding:12px;border-radius:9px;color:#145b40;line-height:1.9}.bad{background:#fff0ef;border-right:4px solid var(--red);padding:12px;border-radius:9px;color:#873638;line-height:1.9}
+.small{font-size:12px;color:var(--muted);line-height:1.9}.muted{color:var(--muted)}
+.labscene{background:linear-gradient(180deg,#e8f3f6,#f8fbfc);border:1px solid #cbdfe7;border-radius:16px;padding:15px;min-height:260px;overflow:hidden}
+.cellart{display:grid;grid-template-columns:1fr 110px 1fr;align-items:end;gap:10px;max-width:760px;margin:auto;min-height:210px}
+.beaker{height:155px;border:4px solid #9ab9c6;border-top:0;border-radius:0 0 20px 20px;position:relative;background:linear-gradient(0deg,#60a9c355 0 68%,transparent 68%);overflow:hidden}
+.beaker.copper{background:linear-gradient(0deg,#4e9bc877 0 68%,transparent 68%)}
+.electrode{position:absolute;width:18px;height:115px;top:5px;right:42%;background:linear-gradient(90deg,#6f7880,#d9e0e3,#68737a);border-radius:3px;box-shadow:2px 2px 4px #3345}
+.electrode.cu{background:linear-gradient(90deg,#8d3e1e,#e78a50,#9b4827)}
+.blabel{text-align:center;font-size:12px;font-weight:700;margin-top:8px}
+.wall{height:145px;border-right:5px dotted #b18c54;border-left:5px dotted #b18c54;display:flex;align-items:center;justify-content:center;color:#987444;font-size:12px;text-align:center;line-height:1.7}
+.wire{height:20px;border-top:4px solid #344d5b;position:relative;grid-column:1/4;margin:0 14%;top:12px}
+.wire:before{content:"";position:absolute;right:0;top:-11px;width:100%;border-top:2px dashed var(--cyan)}
+.electron{position:absolute;top:-13px;right:0;color:#087f91;font-size:13px;animation:flow 2.5s linear infinite;display:none}
+.running .electron{display:block}@keyframes flow{from{right:0}to{right:95%}}
+.metrics{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.metric{background:#f2f7f9;border:1px solid var(--line);padding:10px 14px;border-radius:12px;flex:1;min-width:130px}.metric b{display:block;font-size:19px;color:var(--blue);direction:ltr}
+.potential{width:100%;border-collapse:collapse;font-size:14px}.potential th,.potential td{padding:10px;border-bottom:1px solid var(--line);text-align:center}.potential th{background:#eaf2f6;color:#17445b}.potential tr:hover td{background:#f4fafb}.ltr{direction:ltr;unicode-bidi:embed}
+.ladder{display:flex;flex-direction:column;gap:5px;max-width:600px;margin:12px auto}.ladder div{display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:#edf5f7;border-right:5px solid #3c9da5;font-size:13px}
+.question{padding:13px 0;border-bottom:1px solid var(--line)}.question p{font-weight:700;margin:0 0 8px}.question label{font-weight:400;display:flex;gap:8px;align-items:center;margin:7px 0;cursor:pointer}.question input{width:auto}
+footer{text-align:center;color:#718594;padding:22px;font-size:12px}
+.progress{height:8px;background:#e4edf1;border-radius:10px;overflow:hidden;margin-top:10px}.progress span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));width:0;transition:.3s}
+@media(max-width:650px){header{padding-top:20px}.cellart{grid-template-columns:1fr 65px 1fr}.wall{font-size:10px}.beaker{height:130px}.electrode{height:95px}.nav button{flex:1 1 42%;}.card{padding:15px}}
+@media print{header{background:#123!important;print-color-adjust:exact}.nav,.actions,.btn{display:none!important}.panel{display:block!important}.card{break-inside:avoid}}
+</style></head>
+<body>
+<header>
+ <div class="topline"><div class="brand">آزمایشگاه تعاملی علوم شیمیایی · پایه دوازدهم</div><div class="tag">نسخه آموزشی آفلاین</div></div>
+ <h1>آزمایشگاه مجازی الکتروشیمی</h1>
+ <p>از دادوستد الکترون تا تولید جریان الکتریکی؛ آزمایش کن، مشاهده کن، محاسبه کن و یاد بگیر.</p>
+ <div class="creator">این آزمایشگاه مجازی توسط مهندس حبیب کلانتری، سرگروه شیمی منطقه احمداباد، ساخته شده است.</div>
+</header>
+<main>
+<div class="nav" id="nav">
+ <button class="active" data-tab="home">خانه</button><button data-tab="redox">اکسایش و کاهش</button><button data-tab="metals">واکنش فلزها</button><button data-tab="zncu">سلول Zn–Cu</button><button data-tab="cuag">سلول Cu–Ag</button><button data-tab="table">پتانسیل استاندارد</button><button data-tab="emf">ماشین‌حساب emf</button><button data-tab="battery">باتری لیتیومی</button><button data-tab="quiz">آزمون و گزارش</button>
+</div>
+<section class="panel active" id="home">
+ <div class="card"><h2>به آزمایشگاه خوش آمدید</h2><p class="lead">در این محیط، واکنش‌های اکسایش ـ کاهش و سلول‌های گالوانی را به‌صورت تعاملی بررسی می‌کنید. هر بخش را انتخاب کنید و فعالیت را انجام دهید.</p>
+ <div class="grid">
+ <div class="tile" data-go="redox"><div class="ico">⚛️</div><b>۱. اکسایش و کاهش</b><span>ردیابی الکترون‌ها و نوشتن نیم‌واکنش‌ها</span></div>
+ <div class="tile" data-go="metals"><div class="ico">🧪</div><b>۲. واکنش فلزها</b><span>انتخاب فلز و یون و مشاهده فرآورده‌ها</span></div>
+ <div class="tile" data-go="zncu"><div class="ico">🔋</div><b>۳. سلول روی ـ مس</b><span>آند، کاتد، حرکت الکترون و مهاجرت یون‌ها</span></div>
+ <div class="tile" data-go="cuag"><div class="ico">⚡</div><b>۴. سلول مس ـ نقره</b><span>تحلیل یک سلول گالوانی دیگر</span></div>
+ <div class="tile" data-go="table"><div class="ico">📊</div><b>۵. سری الکتروشیمیایی</b><span>مقایسه پتانسیل‌های کاهش استاندارد</span></div>
+ <div class="tile" data-go="emf"><div class="ico">🧮</div><b>۶. ماشین‌حساب emf</b><span>محاسبه مرحله‌به‌مرحله ولتاژ سلول</span></div>
+ <div class="tile" data-go="battery"><div class="ico">📱</div><b>۷. باتری لیتیومی</b><span>پیوند الکتروشیمی با زندگی روزمره</span></div>
+ <div class="tile" data-go="quiz"><div class="ico">🎯</div><b>۸. آزمون و گزارش</b><span>سنجش یادگیری و دریافت گزارش عملکرد</span></div>
+ </div></div>
+ <div class="card"><h3>مسیر پیشنهادی یادگیری</h3><p class="lead">ابتدا مفهوم اکسایش و کاهش را مرور کنید؛ سپس واکنش فلزها و سلول‌های گالوانی را انجام دهید. در پایان با جدول پتانسیل‌ها، emf را محاسبه و آزمون را تکمیل کنید.</p><div class="note">یادآوری: این برنامه یک شبیه‌ساز آموزشی است. تغییر جرم، دما و حرکت ذرات به‌صورت کیفی و نمایشی مدل‌سازی می‌شود و اندازه‌گیری آزمایشگاهی واقعی نیست.</div></div>
+</section>
+<section class="panel" id="redox">
+ <div class="card"><h2>آزمایش ۱ | اکسایش و کاهش</h2><p class="lead">واکنش روی با یون مس (II) را اجرا کنید و ببینید الکترون‌ها چگونه از یک گونه به گونه دیگر منتقل می‌شوند.</p>
+ <div class="eq">Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s)</div>
+ <div class="two"><div class="card" style="margin:0;background:#f8fbfc"><h3>نیم‌واکنش اکسایش</h3><div class="eq">Zn(s) → Zn²⁺(aq) + 2e⁻</div><p class="small">روی دو الکترون از دست می‌دهد؛ بنابراین اکسایش می‌یابد و کاهنده است.</p></div><div class="card" style="margin:0;background:#f8fbfc"><h3>نیم‌واکنش کاهش</h3><div class="eq">Cu²⁺(aq) + 2e⁻ → Cu(s)</div><p class="small">یون مس دو الکترون می‌گیرد؛ بنابراین کاهش می‌یابد و اکسنده است.</p></div></div>
+ <div class="actions"><button class="btn" id="redoxRun">اجرای گام‌به‌گام واکنش</button><button class="btn secondary" id="redoxReset">شروع مجدد</button></div><div id="redoxSteps" class="note" style="margin-top:13px">برای مشاهده انتقال الکترون، اجرای واکنش را انتخاب کنید.</div>
+ </div>
+ <div class="card"><h3>پیش‌آزمون سریع</h3><div id="preRedox"></div><button class="btn" id="checkPreRedox">بررسی پاسخ‌ها</button><div id="preRedoxResult"></div></div>
+ <div class="card"><h3>خلاصه مفهوم کلیدی</h3><p class="lead">اکسایش یعنی از دست دادن الکترون و کاهش یعنی گرفتن الکترون. نیم‌واکنش باید هم از نظر تعداد اتم‌ها و هم از نظر بار الکتریکی موازنه باشد. اکسنده با گرفتن الکترون، گونه دیگر را اکسایش می‌دهد؛ کاهنده با دادن الکترون، گونه دیگر را کاهش می‌دهد.</p><div class="note">مثال موازنه: <span class="ltr">Al → Al³⁺ + 3e⁻</span> ؛ تعداد اتم Al برابر و بار دو طرف (+3) است.</div></div>
+</section>
+<section class="panel" id="metals">
+ <div class="card"><h2>آزمایش ۲ | واکنش فلزها با یون‌های فلزی</h2><p class="lead">فلز و محلول یونی را انتخاب کنید. شبیه‌ساز، معادله موازنه‌شده و تغییرات مورد انتظار را نمایش می‌دهد.</p>
+ <div class="two"><div class="field"><label>فلز جامد</label><select id="metalPick"><option value="Zn">روی Zn</option><option value="Al">آلومینیم Al</option><option value="Fe">آهن Fe</option></select></div><div class="field"><label>یون موجود در محلول</label><select id="ionPick"><option value="Cu">مس (II) Cu²⁺</option><option value="V">وانادیم (III) V³⁺</option></select></div></div>
+ <div class="labscene"><div style="text-align:center;font-weight:700;color:#1b5b70">محفظه واکنش مجازی</div><div style="display:flex;justify-content:center;align-items:center;gap:24px;margin:22px auto"><div style="width:90px;height:115px;border:3px solid #91b6c4;border-top:0;border-radius:0 0 14px 14px;background:linear-gradient(0deg,#59a5c577 65%,transparent 65%);display:grid;place-items:center;font-weight:800" id="metalBeaker">Zn</div><div style="font-size:30px">＋</div><div style="width:90px;height:115px;border:3px solid #91b6c4;border-top:0;border-radius:0 0 14px 14px;background:linear-gradient(0deg,#368eb077 65%,transparent 65%);display:grid;place-items:center;font-weight:800" id="ionBeaker">Cu²⁺</div></div><div id="metalSceneText" class="small" style="text-align:center">مواد را انتخاب و واکنش را اجرا کنید.</div></div>
+ <div class="actions"><button class="btn" id="runMetal">اجرای واکنش</button><button class="btn secondary" id="resetMetal">بازنشانی</button></div><div id="metalResult" style="margin-top:13px"></div>
+ <div class="note">نکته علمی: در واکنش‌های روی، آهن و آلومینیم با محلول مس (II) سولفات، گرما آزاد می‌شود. واکنش‌های این بخش به‌صورت مدل آموزشی نمایش داده می‌شوند.</div>
+ </div>
+ <div class="card"><h3>پرسش بازخورد</h3><p>در واکنش آلومینیم با یون مس (II)، چند الکترون در معادله موازنه‌شده مبادله می‌شود؟</p><div class="field"><select id="metalQuestion"><option value="">انتخاب پاسخ</option><option value="2">۲ الکترون</option><option value="3">۳ الکترون</option><option value="6">۶ الکترون</option></select></div><button class="btn" id="checkMetalQ">ثبت پاسخ</button><div id="metalQResult"></div></div>
+</section>
+<section class="panel" id="zncu">
+ <div class="card"><h2>آزمایش ۳ | ساخت سلول گالوانی روی ـ مس</h2><p class="lead">دو نیم‌سلول را به مدار خارجی و دیواره متخلخل متصل کنید؛ سپس واکنش خودبه‌خودی را مشاهده کنید.</p>
+ <div class="labscene" id="cellScene">
+ <div class="cellart">
+ <div><div class="beaker"><div class="electrode"></div></div><div class="blabel">آند (−) | روی Zn</div><div class="small" style="text-align:center">محلول Zn²⁺</div></div>
+ <div class="wall">دیواره<br>متخلخل<br>⇄ یون‌ها</div>
+ <div><div class="beaker copper"><div class="electrode cu"></div></div><div class="blabel">کاتد (+) | مس Cu</div><div class="small" style="text-align:center">محلول Cu²⁺</div></div>
+ <div class="wire"><span class="electron">e⁻ →</span></div>
+ </div><div style="text-align:center;font-size:13px;font-weight:700;color:#19536b">مدار خارجی: حرکت الکترون از روی به مس</div>
+ </div>
+ <div class="actions"><button class="btn" id="startCell">شروع واکنش</button><button class="btn secondary" id="pauseCell">توقف / ادامه</button><button class="btn secondary" id="resetCell">بازنشانی</button></div>
+ <div class="metrics"><div class="metric">جرم الکترود روی<b id="znMass">۱۰۰٪</b><span class="small">کاهش می‌یابد</span></div><div class="metric">جرم الکترود مس<b id="cuMass">۱۰۰٪</b><span class="small">افزایش می‌یابد</span></div><div class="metric">ولتاژ استاندارد<b>1.10 V</b><span class="small">مقدار محاسبه‌شده</span></div></div>
+ <div id="cellExplain" class="note" style="margin-top:13px">با شروع واکنش، الکترون‌ها در مدار خارجی از آند به کاتد می‌روند. کاتیون‌ها به سمت کاتد و آنیون‌ها به سمت آند مهاجرت می‌کنند تا خنثایی بار حفظ شود.</div>
+ </div>
+ <div class="card"><h3>پیش‌بینی پیش از آزمایش</h3><div class="field"><label>کدام الکترود جرمش افزایش می‌یابد؟</label><select id="cellPredict"><option value="">انتخاب کنید</option><option value="zn">روی</option><option value="cu">مس</option><option value="both">هر دو</option></select></div><button class="btn" id="checkCellPredict">بررسی پیش‌بینی</button><div id="cellPredictResult"></div>
+ <div class="eq">Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s)</div><p class="small">آند: <span class="ltr">Zn → Zn²⁺ + 2e⁻</span> | کاتد: <span class="ltr">Cu²⁺ + 2e⁻ → Cu</span></p></div>
+</section>
+<section class="panel" id="cuag">
+ <div class="card"><h2>آزمایش ۴ | سلول گالوانی مس ـ نقره</h2><p class="lead">با مقایسه پتانسیل‌های استاندارد، آند و کاتد را تعیین کنید.</p><div class="grid"><div class="tile"><div class="ico">🟠</div><b>نیم‌سلول مس</b><span class="ltr">Cu²⁺/Cu = +0.34 V</span></div><div class="tile"><div class="ico">⚪</div><b>نیم‌سلول نقره</b><span class="ltr">Ag⁺/Ag = +0.80 V</span></div></div>
+ <div class="eq">Cu(s) + 2Ag⁺(aq) → Cu²⁺(aq) + 2Ag(s)</div>
+ <div class="two"><div class="card" style="margin:0"><h3>آند (−) | مس</h3><div class="eq">Cu → Cu²⁺ + 2e⁻</div><p class="small">مس اکسایش می‌یابد؛ جرم الکترود مس کاهش می‌یابد.</p></div><div class="card" style="margin:0"><h3>کاتد (+) | نقره</h3><div class="eq">2Ag⁺ + 2e⁻ → 2Ag</div><p class="small">یون نقره کاهش می‌یابد؛ نقره روی الکترود رسوب می‌کند.</p></div></div>
+ <div class="metric">نیروی محرکه استاندارد<b>0.46 V</b></div>
+ <div class="note">الکترون‌ها از الکترود مس (آند) به الکترود نقره (کاتد) حرکت می‌کنند. در دیواره متخلخل، کاتیون‌ها به سمت کاتد و آنیون‌ها به سمت آند مهاجرت می‌کنند.</div></div>
+ <div class="card"><h3>تمرین</h3><p>در سلول مس ـ نقره، کدام گونه اکسنده است؟</p><select id="cuagQ"><option value="">انتخاب پاسخ</option><option value="cu">Cu(s)</option><option value="ag">Ag⁺(aq)</option><option value="zn">Zn(s)</option></select><button class="btn" id="cuagCheck" style="margin-top:10px">بررسی</button><div id="cuagFeedback"></div></div>
+</section>
+<section class="panel" id="table">
+ <div class="card"><h2>آزمایش ۵ | جدول پتانسیل‌های کاهشی استاندارد</h2><p class="lead">مرجع مقایسه، الکترود استاندارد هیدروژن (SHE) با پتانسیل صفر ولت است. داده‌ها در شرایط استاندارد کتاب بررسی می‌شوند.</p>
+ <div class="note">شرایط استاندارد: دمای ۲۵°C، فشار گاز ۱ atm و غلظت محلول الکترولیت ۱ mol/L. برای الکترود استاندارد هیدروژن، pH = 0.</div>
+ <table class="potential"><thead><tr><th>نیم‌واکنش کاهش</th><th>E° (V)</th></tr></thead><tbody id="potentialRows"></tbody></table>
+ <div class="ladder" id="ladder"></div>
+ <p class="small">هرچه E° کاهش مثبت‌تر باشد، تمایل گونه به کاهش بیشتر است. فلزهای دارای E° منفی‌تر، در مقایسه با فلزهای با E° مثبت‌تر، کاهنده‌های قوی‌تری هستند.</p>
+ </div>
+</section>
+<section class="panel" id="emf">
+ <div class="card"><h2>آزمایش ۶ | ماشین‌حساب نیروی محرکه الکتریکی (emf)</h2><p class="lead">دو نیم‌سلول را انتخاب کنید. برنامه به‌صورت خودکار کاتد، آند، نیم‌واکنش‌ها و emf را مشخص می‌کند.</p>
+ <div class="two"><div class="field"><label>نیم‌سلول اول</label><select id="half1"></select></div><div class="field"><label>نیم‌سلول دوم</label><select id="half2"></select></div></div>
+ <button class="btn" id="calcEmf">محاسبه emf</button><div id="emfResult" style="margin-top:14px"></div>
+ <div class="note">رابطه محاسبه: <span class="ltr">emf = E°(کاتد) − E°(آند)</span>. در این رابطه از پتانسیل‌های کاهش استاندارد استفاده می‌شود و ضرایب موازنه نیم‌واکنش، مقدار E° را تغییر نمی‌دهند.</div>
+ </div>
+ <div class="card"><h3>مثال عددی حل‌شده | روی ـ مس</h3><div class="eq">emf = +0.34 − (−0.76) = +1.10 V</div><p class="small">کاتد: Cu²⁺/Cu و آند: Zn²⁺/Zn. مقدار مثبت نشان‌دهنده جهت خودبه‌خودی واکنش نوشته‌شده برای سلول گالوانی است.</p>
+ <h3>مثال عددی حل‌شده | مس ـ نقره</h3><div class="eq">emf = +0.80 − (+0.34) = +0.46 V</div></div>
+</section>
+<section class="panel" id="battery">
+ <div class="card"><h2>آزمایش ۷ | لیتیوم و باتری‌های سبک و پرظرفیت</h2><p class="lead">باتری وسیله‌ای برای تبدیل انرژی شیمیایی به انرژی الکتریکی است. در باتری‌ها، نیم‌واکنش آندی و کاتدی جریان الکتریکی را در مدار بیرونی برقرار می‌کنند.</p>
+ <div class="grid"><div class="tile"><div class="ico">🔋</div><b>ویژگی لیتیوم</b><span>چگالی کم و پتانسیل استاندارد کاهش بسیار منفی</span></div><div class="tile"><div class="ico">📱</div><b>کاربرد</b><span>باتری‌های سبک و پرظرفیت تلفن همراه</span></div><div class="tile"><div class="ico">💻</div><b>کاربرد</b><span>باتری‌های قابل شارژ رایانه همراه</span></div></div>
+ <div class="labscene" style="display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap">
+ <div style="width:100px;height:190px;border-radius:22px;background:linear-gradient(90deg,#a9b7c0,#f4f7f8,#8999a5);border:3px solid #748794;position:relative;box-shadow:inset 0 0 0 5px #ffffff55"><div style="position:absolute;top:-9px;left:35px;width:30px;height:9px;background:#596b77;border-radius:5px"></div><div style="position:absolute;top:65px;left:0;right:0;text-align:center;color:#183e53;font-weight:800;writing-mode:vertical-rl;margin:auto">Li-ion</div></div>
+ <div style="max-width:450px"><h3>چرا لیتیوم؟</h3><p class="small">لیتیوم در میان فلزها کمترین چگالی و E° بسیار منفی را دارد. این ویژگی‌ها راه را برای ساخت باتری‌های سبک‌تر، کوچک‌تر و با توانایی ذخیره انرژی بیشتر هموار کرده است.</p><p class="small">برخی باتری‌های لیتیومی در تلفن و رایانه همراه به کار می‌روند و می‌توان آن‌ها را بارها شارژ کرد.</p></div></div>
+ <div class="question"><p>چرا لیتیوم برای ساخت باتری‌های سبک و پرظرفیت اهمیت دارد؟</p><textarea id="batteryAnswer" rows="3" style="width:100%;border:1px solid #cbd9e2;border-radius:10px;padding:10px;font:inherit"></textarea><button class="btn" id="saveBattery" style="margin-top:10px">ثبت پاسخ</button><div id="batteryFeedback"></div></div>
+ </div>
+</section>
+<section class="panel" id="quiz">
+ <div class="card"><h2>آزمون پایانی | سنجش یادگیری</h2><p class="lead">به پرسش‌ها پاسخ دهید و در پایان نتیجه و گزارش خود را دریافت کنید.</p>
+ <div class="field"><label>نام و نام خانوادگی</label><input id="studentName" placeholder="نام دانش‌آموز"></div><div class="field"><label>کلاس</label><input id="studentClass" placeholder="مثلاً دوازدهم تجربی"></div>
+ <div id="quizQuestions"></div><button class="btn" id="submitQuiz">ثبت آزمون و محاسبه نمره</button><div id="quizResult"></div>
+ <div class="actions"><button class="btn secondary" id="downloadReport">دریافت گزارش CSV</button><button class="btn secondary" onclick="window.print()">چاپ گزارش / آزمایشگاه</button></div>
+ <div class="small">اطلاعات عملکرد در همین مرورگر ذخیره می‌شود. برای دریافت گزارش، پس از تکمیل آزمون از دکمه CSV استفاده کنید.</div></div>
+ <div class="card"><h3>پیشرفت فعالیت‌ها</h3><div id="progressText" class="small">هنوز فعالیتی ثبت نشده است.</div><div class="progress"><span id="progressBar"></span></div></div>
+</section>
+</main>
+<footer>آزمایشگاه مجازی الکتروشیمی · شیمی پایه دوازدهم<br>این آزمایشگاه مجازی توسط مهندس حبیب کلانتری، سرگروه شیمی منطقه احمداباد، ساخته شده است.</footer>
+<script>
+const potentials=[
+ {id:"Au",name:"طلا",half:"Au³⁺ + 3e⁻ → Au",e:1.50},
+ {id:"Ag",name:"نقره",half:"Ag⁺ + e⁻ → Ag",e:.80},
+ {id:"Cu",name:"مس",half:"Cu²⁺ + 2e⁻ → Cu",e:.34},
+ {id:"H",name:"هیدروژن",half:"2H⁺ + 2e⁻ → H₂",e:0},
+ {id:"Fe",name:"آهن",half:"Fe²⁺ + 2e⁻ → Fe",e:-.44},
+ {id:"Zn",name:"روی",half:"Zn²⁺ + 2e⁻ → Zn",e:-.76},
+ {id:"Al",name:"آلومینیم",half:"Al³⁺ + 3e⁻ → Al",e:-1.66},
+ {id:"Mg",name:"منیزیم",half:"Mg²⁺ + 2e⁻ → Mg",e:-2.37}
+];
+const $=id=>document.getElementById(id);
+let completed=new Set(), cellTimer=null,cellStep=0,quizScore=null,quizAnswers=[];
+function go(id){document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));window.scrollTo({top:0,behavior:"smooth"});}
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>go(b.dataset.tab));
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
+function done(id){completed.add(id);updateProgress();}
+function updateProgress(){$("progressText").textContent=`${completed.size} فعالیت از ۷ فعالیت اصلی ثبت شده است.`;$("progressBar").style.width=(completed.size/7*100)+"%";}
+function show(el,html){$(el).innerHTML=html;}
+const redoxQs=[{q:"اکسایش به چه معناست؟",opts:["گرفتن الکترون","از دست دادن الکترون","گرفتن پروتون"],a:1,why:"اکسایش یعنی از دست دادن الکترون."},{q:"در واکنش Zn و Cu²⁺، اکسنده کدام است؟",opts:["Zn","Cu²⁺","Zn²⁺"],a:1,why:"یون Cu²⁺ الکترون می‌گیرد و اکسنده است."},{q:"در نیم‌واکنش Zn → Zn²⁺ + ... چند الکترون قرار می‌گیرد؟",opts:["۱","۲","۳"],a:1,why:"بار روی از صفر به +۲ می‌رسد؛ پس دو الکترون از دست می‌دهد."}];
+function renderMiniQuiz(target,qs){show(target,qs.map((q,i)=>`<div class="question"><p>${i+1}. ${q.q}</p>${q.opts.map((o,j)=>`<label><input type="radio" name="${target}${i}" value="${j}">${o}</label>`).join("")}</div>`).join(""))}
+renderMiniQuiz("preRedox",redoxQs);
+$("redoxRun").onclick=()=>{const steps=["گام ۱: اتم روی در واکنش‌دهنده‌ها حضور دارد و دو الکترون از دست می‌دهد.","گام ۲: یون روی Zn²⁺ وارد محلول می‌شود؛ این فرایند اکسایش است.","گام ۳: یون Cu²⁺ همان دو الکترون را دریافت می‌کند و به مس فلزی تبدیل می‌شود؛ این فرایند کاهش است.","گام ۴: الکترون‌های مبادله‌شده در دو نیم‌واکنش برابرند؛ معادله کلی موازنه است."];let i=0;show("redoxSteps",steps[i]);const t=setInterval(()=>{i++;if(i>=steps.length){clearInterval(t);done("redox");return;}show("redoxSteps",steps[i]);},1100)};
+$("redoxReset").onclick=()=>show("redoxSteps","برای مشاهده انتقال الکترون، اجرای واکنش را انتخاب کنید.");
+$("checkPreRedox").onclick=()=>{let score=0;redoxQs.forEach((q,i)=>{let v=document.querySelector(`input[name="preRedox${i}"]:checked`);if(v&&+v.value===q.a)score++});show("preRedoxResult",`<div class="${score===3?"good":"note"}">پاسخ صحیح: ${score} از ۳. ${redoxQs.map(q=>q.why).join(" ")}</div>`);done("pretest")};
+const reactionData={
+ "Zn-Cu":{eq:"Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s)",ox:"Zn → Zn²⁺ + 2e⁻",red:"Cu²⁺ + 2e⁻ → Cu",electrons:2,desc:"روی اکسایش می‌یابد و یون مس کاهش می‌یابد."},
+ "Al-Cu":{eq:"2Al(s) + 3Cu²⁺(aq) → 2Al³⁺(aq) + 3Cu(s)",ox:"2Al → 2Al³⁺ + 6e⁻",red:"3Cu²⁺ + 6e⁻ → 3Cu",electrons:6,desc:"دو اتم آلومینیم در مجموع شش الکترون می‌دهند و سه یون مس آن‌ها را می‌گیرند."},
+ "Fe-Cu":{eq:"Fe(s) + Cu²⁺(aq) → Fe²⁺(aq) + Cu(s)",ox:"Fe → Fe²⁺ + 2e⁻",red:"Cu²⁺ + 2e⁻ → Cu",electrons:2,desc:"آهن اکسایش می‌یابد و یون مس به مس فلزی کاهش می‌یابد."},
+ "Zn-V":{eq:"Zn(s) + 2V³⁺(aq) → Zn²⁺(aq) + 2V²⁺(aq)",ox:"Zn → Zn²⁺ + 2e⁻",red:"2V³⁺ + 2e⁻ → 2V²⁺",electrons:2,desc:"روی اکسایش می‌یابد و یون V³⁺ با دریافت الکترون به V²⁺ کاهش می‌یابد؛ در این واکنش وانادیم فلزی تشکیل نمی‌شود."}
+};
+function updateMetal(){const m=$("metalPick").value,i=$("ionPick").value;$("metalBeaker").textContent=m;$("ionBeaker").textContent=i==="Cu"?"Cu²⁺":"V³⁺";}
+$("metalPick").onchange=updateMetal;$("ionPick").onchange=updateMetal;
+$("runMetal").onclick=()=>{let k=$("metalPick").value+"-"+$("ionPick").value,d=reactionData[k];if(!d){show("metalResult",'<div class="bad">برای این ترکیب، داده واکنش در این آزمایشگاه تعریف نشده است.</div>');return;}show("metalSceneText","واکنش در حال پیشرفت است؛ رسوب و آزاد شدن گرما به‌صورت آموزشی نمایش داده می‌شوند.");show("metalResult",`<div class="good"><b>واکنش موازنه‌شده</b><div class="eq">${d.eq}</div><b>نیم‌واکنش اکسایش:</b><div class="eq">${d.ox}</div><b>نیم‌واکنش کاهش:</b><div class="eq">${d.red}</div>${d.desc}<br>تعداد الکترون مبادله‌شده در معادله موازنه‌شده: ${d.electrons}<br>در واکنش‌های فلزهای روی، آهن و آلومینیم با یون مس (II)، آزاد شدن گرما گزارش شده است.</div>`);done("metals");};
+$("resetMetal").onclick=()=>{show("metalResult","");show("metalSceneText","مواد را انتخاب و واکنش را اجرا کنید.");};
+$("checkMetalQ").onclick=()=>{let ok=$("metalQuestion").value==="6";show("metalQResult",`<div class="${ok?"good":"bad"}">${ok?"درست است.":"پاسخ درست ۶ الکترون است."} دو اتم آلومینیم هرکدام سه الکترون از دست می‌دهند؛ در مجموع شش الکترون مبادله می‌شود.</div>`);};
+function cellTick(){cellStep=Math.min(cellStep+1,10);$("znMass").textContent=(100-cellStep*2)+"٪";$("cuMass").textContent=(100+cellStep*2)+"٪";$("cellScene").classList.add("running");$("cellExplain").innerHTML=`پیشرفت نمایشی واکنش: ${cellStep*10}٪. روی در آند به Zn²⁺ تبدیل می‌شود؛ یون Cu²⁺ در کاتد الکترون می‌گیرد و مس رسوب می‌کند. کاتیون‌ها به سمت کاتد و آنیون‌ها به سمت آند مهاجرت می‌کنند.`;if(cellStep>=10){clearInterval(cellTimer);cellTimer=null;done("zncu");}}
+$("startCell").onclick=()=>{if(cellStep>=10)cellStep=0;if(cellTimer)return;cellTimer=setInterval(cellTick,550);};
+$("pauseCell").onclick=()=>{if(cellTimer){clearInterval(cellTimer);cellTimer=null;$("cellExplain").innerHTML+=" <b>آزمایش متوقف شد.</b>";}else if(cellStep>0&&cellStep<10){$("startCell").click();}};
+$("resetCell").onclick=()=>{clearInterval(cellTimer);cellTimer=null;cellStep=0;$("znMass").textContent="۱۰۰٪";$("cuMass").textContent="۱۰۰٪";$("cellScene").classList.remove("running");$("cellExplain").textContent="با شروع واکنش، الکترون‌ها در مدار خارجی از آند به کاتد می‌روند. کاتیون‌ها به سمت کاتد و آنیون‌ها به سمت آند مهاجرت می‌کنند تا خنثایی بار حفظ شود.";};
+$("checkCellPredict").onclick=()=>{let ok=$("cellPredict").value==="cu";show("cellPredictResult",`<div class="${ok?"good":"bad"}">${ok?"پیش‌بینی درست است.":"پاسخ درست: الکترود مس."} یون Cu²⁺ در کاتد کاهش می‌یابد و مس فلزی روی تیغه رسوب می‌کند؛ بنابراین جرم مس افزایش می‌یابد.</div>`);};
+$("cuagCheck").onclick=()=>{let ok=$("cuagQ").value==="ag";show("cuagFeedback",`<div class="${ok?"good":"bad"}">${ok?"درست است.":"پاسخ صحیح Ag⁺ است."} یون نقره الکترون می‌گیرد و کاهش می‌یابد؛ بنابراین اکسنده است.</div>`);done("cuag");};
+function fmt(x){return (x>0?"+":"")+x.toFixed(2);}
+$("potentialRows").innerHTML=potentials.map(p=>`<tr><td class="ltr">${p.half}</td><td class="ltr">${fmt(p.e)}</td></tr>`).join("");
+$("ladder").innerHTML=potentials.map(p=>`<div><span>${p.name} · <span class="ltr">${p.id}</span></span><b class="ltr">${fmt(p.e)} V</b></div>`).join("");
+[...potentials].forEach((p,i)=>{let o=`<option value="${p.id}">${p.name} (${p.id}) · ${fmt(p.e)} V</option>`;$("half1").insertAdjacentHTML("beforeend",o);$("half2").insertAdjacentHTML("beforeend",o)});
+$("half1").value="Zn";$("half2").value="Cu";
+$("calcEmf").onclick=()=>{let a=potentials.find(p=>p.id===$("half1").value),b=potentials.find(p=>p.id===$("half2").value);if(a.id===b.id){show("emfResult",'<div class="bad">برای ساخت سلول، دو نیم‌سلول متفاوت انتخاب کنید.</div>');return;}let cath=a.e>b.e?a:b,an=a.e>b.e?b:a,emf=cath.e-an.e;show("emfResult",`<div class="good"><h3>نتیجه محاسبه</h3><p>کاتد (کاهش): <b>${cath.name}</b> با E° = ${fmt(cath.e)} V</p><div class="eq">${cath.half}</div><p>آند (اکسایش): <b>${an.name}</b> با پتانسیل کاهش E° = ${fmt(an.e)} V</p><div class="eq">${an.half.replace("→","←")} (در جهت اکسایش)</div><div class="eq">emf = ${fmt(cath.e)} − (${fmt(an.e)}) = ${emf.toFixed(2)} V</div><b>نتیجه: emf استاندارد = ${emf.toFixed(2)} ولت</b><p>الکترون‌ها از آند (${an.name}) به کاتد (${cath.name}) حرکت می‌کنند.</p></div>`);done("emf");};
+$("saveBattery").onclick=()=>{let v=$("batteryAnswer").value.trim();if(v.length<8){show("batteryFeedback",'<div class="bad">لطفاً پاسخ خود را کامل‌تر بنویسید.</div>');return;}show("batteryFeedback",'<div class="good">پاسخ ثبت شد. نکته کلیدی: چگالی کم و E° بسیار منفی لیتیوم، در ساخت باتری‌های سبک و پرظرفیت اهمیت دارد.</div>');done("battery");};
+const qs=[
+ {q:"اکسایش به کدام فرایند گفته می‌شود؟",o:["گرفتن الکترون","از دست دادن الکترون","کاهش بار مثبت"],a:1,e:"اکسایش یعنی از دست دادن الکترون."},
+ {q:"در سلول Zn–Cu، آند کدام الکترود است؟",o:["مس","روی","هر دو"],a:1,e:"روی در آند اکسایش می‌یابد."},
+ {q:"جهت حرکت الکترون در مدار بیرونی سلول Zn–Cu چیست؟",o:["از مس به روی","از روی به مس","از دیواره متخلخل"],a:1,e:"الکترون از آند روی به کاتد مس می‌رود."},
+ {q:"در سلول Zn–Cu جرم کدام الکترود افزایش می‌یابد؟",o:["روی","مس","هر دو"],a:1,e:"یون Cu²⁺ در کاتد به مس فلزی تبدیل می‌شود."},
+ {q:"در دیواره متخلخل، کاتیون‌ها به کدام سمت مهاجرت می‌کنند؟",o:["کاتد","آند","در مدار سیمی"],a:0,e:"کاتیون‌ها به سمت کاتد و آنیون‌ها به سمت آند مهاجرت می‌کنند."},
+ {q:"پتانسیل استاندارد کاهش SHE برابر چند است؟",o:["+1.00 V","0.00 V","−1.00 V"],a:1,e:"پتانسیل استاندارد الکترود هیدروژن صفر در نظر گرفته شده است."},
+ {q:"emf سلول Zn–Cu با E° مس +0.34 و E° روی −0.76 چند است؟",o:["0.42 V","1.10 V","−1.10 V"],a:1,e:"0.34 − (−0.76) = 1.10 V."},
+ {q:"در سلول Cu–Ag کدام گونه کاهش می‌یابد؟",o:["Cu(s)","Ag⁺(aq)","Cu²⁺(aq)"],a:1,e:"Ag⁺ با گرفتن الکترون به Ag تبدیل می‌شود."},
+ {q:"کدام ویژگی لیتیوم در باتری‌ها اهمیت دارد؟",o:["چگالی زیاد","چگالی کم و E° بسیار منفی","پتانسیل صفر"],a:1,e:"کتاب به چگالی کم و E° بسیار منفی لیتیوم اشاره می‌کند."},
+ {q:"در واکنش Zn + 2V³⁺ → Zn²⁺ + 2V²⁺، وانادیم چه فرایندی دارد؟",o:["اکسایش","کاهش","بدون تغییر"],a:1,e:"V³⁺ الکترون می‌گیرد و به V²⁺ کاهش می‌یابد."}
+];
+$("quizQuestions").innerHTML=qs.map((q,i)=>`<div class="question"><p>${i+1}. ${q.q}</p>${q.o.map((o,j)=>`<label><input type="radio" name="final${i}" value="${j}">${o}</label>`).join("")}</div>`).join("");
+$("submitQuiz").onclick=()=>{let name=$("studentName").value.trim()||"بدون نام",cl=$("studentClass").value.trim()||"ثبت نشده",score=0,detail=[];qs.forEach((q,i)=>{let v=document.querySelector(`input[name="final${i}"]:checked`),correct=!!v&&+v.value===q.a;if(correct)score++;detail.push({q:q.q,answer:v?q.o[+v.value]:"بی‌پاسخ",correct:q.o[q.a],ok:correct,explain:q.e});});quizScore={name,cl,score,total:qs.length,percent:Math.round(score/qs.length*100),date:new Date().toLocaleString("fa-IR"),detail};localStorage.setItem("electrochemReport",JSON.stringify(quizScore));show("quizResult",`<div class="${score>=7?"good":"note"}"><h3>گزارش نتیجه آزمون</h3><div class="metrics"><div class="metric">نمره<b>${score} / ${qs.length}</b></div><div class="metric">درصد موفقیت<b>${quizScore.percent}٪</b></div></div><p>دانش‌آموز: ${name} | کلاس: ${cl}</p>${detail.map((d,i)=>`<p>${i+1}. ${d.ok?"✓":"✗"} ${d.explain}</p>`).join("")}</div>`);done("quiz");};
+$("downloadReport").onclick=()=>{let r=quizScore||JSON.parse(localStorage.getItem("electrochemReport")||"null");if(!r){show("quizResult",'<div class="bad">ابتدا آزمون را تکمیل و ثبت کنید.</div>');return;}let rows=[["نام","کلاس","تاریخ","نمره","درصد"],[r.name,r.cl,r.date,r.score+"/"+r.total,r.percent+"%"],[],["شماره","سؤال","پاسخ دانش‌آموز","پاسخ صحیح","وضعیت","توضیح"],...r.detail.map((d,i)=>[i+1,d.q,d.answer,d.correct,d.ok?"صحیح":"غلط",d.explain])];let csv="\uFEFF"+rows.map(row=>row.map(x=>'"'+String(x??"").replace(/"/g,'""')+'"').join(",")).join("\n");let blob=new Blob([csv],{type:"text/csv;charset=utf-8;"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="گزارش-آزمون-الکتروشیمی.csv";a.click();URL.revokeObjectURL(url);};
+updateProgress();
+</script>
+</body></html>
